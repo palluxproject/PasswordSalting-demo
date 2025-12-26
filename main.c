@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+// Generates a simple hash value from a given string
 unsigned int simpleHash(char *str){
     unsigned int hash =0;
         for(int i=0; str[i]!= '\0'; i++){
@@ -11,6 +12,7 @@ unsigned int simpleHash(char *str){
         return hash;
     }
 
+// Generates a random salt string to be added to the password. Ensures same passwords produce different hashes
 void generateSalt(char *salt){
     char set[]= "abcdefghijklmnopqrstuvwxyz0123456789";
     for(int i=0; i <6; i++){
@@ -19,6 +21,9 @@ void generateSalt(char *salt){
     salt[6] = '\0';
 }
 
+// Handles new user registration
+// takes username and password, generates salt.
+// hashes (password + salt) and stores data in a file
 void UserRegister(){
     char username[50];
     char password[20];
@@ -50,7 +55,9 @@ void UserRegister(){
     printf("USER REGISTERED SUCCESSFULLY! \n");
 }
 
-
+// Handles user login
+//Reads stored salt and hash from file.
+// re-hashes entered password and verifies credentials.
 void UserLogin(){
     char username[50];
     char password[20];
@@ -92,6 +99,7 @@ void UserLogin(){
     printf("USER NOT FOUND! PLEASE REGISTER\n");
 }
 
+// displays the main menu and choices.
 int main(){
     srand(time(NULL));
     int choose;
